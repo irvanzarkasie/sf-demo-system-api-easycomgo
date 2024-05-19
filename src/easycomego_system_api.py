@@ -59,7 +59,7 @@ class EasycomegoApi(Resource):
 # end class
 
 class EasycomegoApiDefault(Resource):
-   def get(self, transport_type):
+   def get(self):
       # Parse arguments
       args = request.args
       departure_code = args.get("departureCode", None)
