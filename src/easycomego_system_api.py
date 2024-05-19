@@ -52,7 +52,7 @@ class EasycomegoApi(Resource):
       destination_code = args.get("destinationCode", None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
-      resp_payload = json.loads(resp.decode("utf-8"))
+      resp_payload = json.loads(resp.data.decode("utf-8"))
 
       resp_list = []
       for route in resp_payload:
@@ -154,7 +154,7 @@ class EasycomegoApiDefault(Resource):
       destination_code = args.get("destinationCode", None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
-      resp_payload = json.loads(resp.decode("utf-8"))
+      resp_payload = json.loads(resp.data.decode("utf-8"))
 
       resp_list = []
       resp_list = []
