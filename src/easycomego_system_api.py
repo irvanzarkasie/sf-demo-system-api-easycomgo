@@ -56,8 +56,10 @@ class EasycomegoApi(Resource):
 
       return jsonify({})
    # end def
+# end class
 
-   def get(self):
+class EasycomegoApiDefault(Resource):
+   def get(self, transport_type):
       # Parse arguments
       args = request.args
       departure_code = args.get("departureCode", None)
@@ -71,7 +73,7 @@ class EasycomegoApi(Resource):
 # end class
 
 api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/<transport_type>/routes')
-api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/routes')
+api.add_resource(EasycomegoApiDefault, '/sys/easycomeeasygo/booking/routes')
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=api_port)
