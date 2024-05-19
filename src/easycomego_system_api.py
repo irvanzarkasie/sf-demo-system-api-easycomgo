@@ -51,7 +51,7 @@ class EasycomegoApi(Resource):
       departure_code = args.get("departureCode", None)
       destination_code = args.get("destinationCode", None)
 
-      resp = http.request("GET", "http://168.119.225.15:39000/getRoutes"})
+      resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
       print(resp.data)
 
      return jsonify({})
