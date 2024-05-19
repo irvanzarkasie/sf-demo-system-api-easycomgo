@@ -52,9 +52,97 @@ class EasycomegoApi(Resource):
       destination_code = args.get("destinationCode", None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
-      print(resp.data)
+      resp_payload = json.loads(resp.decode("utf-8"))
 
-      return jsonify({})
+      resp_list = []
+      for route in resp_payload:
+         dep_code = route.get("departureCode")
+         dest_code = route.get("destinationCode")
+         trans_code = route.get("transportCode")
+         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+
+         if transport_type is not None and departure_code is not None and destination_code is not None:
+            if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is not None and destination_code is not None:
+            if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is None and destination_code is not None:
+            if transport_type == mapped_trans_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is not None and destination_code is None:
+            if transport_type == mapped_trans_code and departure_code == mapped_dep_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is None and destination_code is not None:
+            if destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is not None and destination_code is None:
+            if departure_code == mapped_dep_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is None and destination_code is None:
+            if transport_type == mapped_trans_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is None and destination_code is None:
+            resp_list.append({
+               "transportCode":  mapped_trans_code,
+               "departureCode": mapped_dep_code,
+               "destinationCode": mapped_dest_code
+            })
+         # end if
+         else:
+            resp_list.append({
+               "transportCode":  mapped_trans_code,
+               "departureCode": mapped_dep_code,
+               "destinationCode": mapped_dest_code
+            })
+         # end else
+      # end for
+
+      return jsonify(resp_list)
    # end def
 # end class
 
@@ -66,9 +154,98 @@ class EasycomegoApiDefault(Resource):
       destination_code = args.get("destinationCode", None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
-      print(resp.data)
+      resp_payload = json.loads(resp.decode("utf-8"))
 
-      return jsonify({})
+      resp_list = []
+      resp_list = []
+      for route in resp_payload:
+         dep_code = route.get("departureCode")
+         dest_code = route.get("destinationCode")
+         trans_code = route.get("transportCode")
+         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+
+         if transport_type is not None and departure_code is not None and destination_code is not None:
+            if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is not None and destination_code is not None:
+            if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is None and destination_code is not None:
+            if transport_type == mapped_trans_code and destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is not None and destination_code is None:
+            if transport_type == mapped_trans_code and departure_code == mapped_dep_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is None and destination_code is not None:
+            if destination_code == mapped_dest_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is not None and destination_code is None:
+            if departure_code == mapped_dep_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is not None and departure_code is None and destination_code is None:
+            if transport_type == mapped_trans_code:
+               resp_list.append({
+                  "transportCode":  mapped_trans_code,
+                  "departureCode": mapped_dep_code,
+                  "destinationCode": mapped_dest_code
+               })
+            # end if
+         # end if
+         elif transport_type is None and departure_code is None and destination_code is None:
+            resp_list.append({
+               "transportCode":  mapped_trans_code,
+               "departureCode": mapped_dep_code,
+               "destinationCode": mapped_dest_code
+            })
+         # end if
+         else:
+            resp_list.append({
+               "transportCode":  mapped_trans_code,
+               "departureCode": mapped_dep_code,
+               "destinationCode": mapped_dest_code
+            })
+         # end else
+      # end for
+
+      return jsonify(resp_list)
    # end def
 # end class
 
