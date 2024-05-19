@@ -166,16 +166,7 @@ class EasycomegoApiDefault(Resource):
          mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
          mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
 
-         if transport_type is not None and departure_code is not None and destination_code is not None:
-            if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
-               resp_list.append({
-                  "transportCode":  mapped_trans_code,
-                  "departureCode": mapped_dep_code,
-                  "destinationCode": mapped_dest_code
-               })
-            # end if
-         # end if
-         elif transport_type is None and departure_code is not None and destination_code is not None:
+         if departure_code is not None and destination_code is not None:
             if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
@@ -184,34 +175,7 @@ class EasycomegoApiDefault(Resource):
                })
             # end if
          # end if
-         elif transport_type is not None and departure_code is None and destination_code is not None:
-            if transport_type == mapped_trans_code and destination_code == mapped_dest_code:
-               resp_list.append({
-                  "transportCode":  mapped_trans_code,
-                  "departureCode": mapped_dep_code,
-                  "destinationCode": mapped_dest_code
-               })
-            # end if
-         # end if
-         elif transport_type is not None and departure_code is not None and destination_code is None:
-            if transport_type == mapped_trans_code and departure_code == mapped_dep_code:
-               resp_list.append({
-                  "transportCode":  mapped_trans_code,
-                  "departureCode": mapped_dep_code,
-                  "destinationCode": mapped_dest_code
-               })
-            # end if
-         # end if
-         elif transport_type is None and departure_code is None and destination_code is not None:
-            if destination_code == mapped_dest_code:
-               resp_list.append({
-                  "transportCode":  mapped_trans_code,
-                  "departureCode": mapped_dep_code,
-                  "destinationCode": mapped_dest_code
-               })
-            # end if
-         # end if
-         elif transport_type is None and departure_code is not None and destination_code is None:
+         elif departure_code is not None and destination_code is None:
             if departure_code == mapped_dep_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
@@ -220,21 +184,14 @@ class EasycomegoApiDefault(Resource):
                })
             # end if
          # end if
-         elif transport_type is not None and departure_code is None and destination_code is None:
-            if transport_type == mapped_trans_code:
+         elif departure_code is None and destination_code is not None:
+            if destination_code == mapped_dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
                   "destinationCode": mapped_dest_code
                })
             # end if
-         # end if
-         elif transport_type is None and departure_code is None and destination_code is None:
-            resp_list.append({
-               "transportCode":  mapped_trans_code,
-               "departureCode": mapped_dep_code,
-               "destinationCode": mapped_dest_code
-            })
          # end if
          else:
             resp_list.append({
