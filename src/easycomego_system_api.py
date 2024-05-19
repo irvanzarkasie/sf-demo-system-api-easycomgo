@@ -56,9 +56,22 @@ class EasycomegoApi(Resource):
 
       return jsonify({})
    # end def
+
+   def get(self):
+      # Parse arguments
+      args = request.args
+      departure_code = args.get("departureCode", None)
+      destination_code = args.get("destinationCode", None)
+
+      resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
+      print(resp.data)
+
+      return jsonify({})
+   # end def
 # end class
 
-api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/<transportTypeCode>/routes')
+api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/<transport_type>/routes')
+api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/routes')
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=api_port)
