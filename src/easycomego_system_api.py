@@ -175,6 +175,10 @@ class EasycomegoApiDefault(Resource):
 
       resp_list = []
       resp_list = []
+
+      print(departure_code)
+      print(destination_code)
+
       for route in resp_payload:
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
