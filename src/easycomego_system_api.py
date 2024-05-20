@@ -73,15 +73,15 @@ class EasycomegoApi(Resource):
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
          trans_code = route.get("transportCode")
-         #mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
-         #mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         #mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
-         mapped_dep_code = dep_code
-         mapped_dest_code = dest_code
-         mapped_trans_code = trans_code
+         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+         #mapped_dep_code = dep_code
+         #mapped_dest_code = dest_code
+         #mapped_trans_code = trans_code
 
          if transport_type is not None and departure_code is not None and destination_code is not None:
-            if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+            if transport_type == trans_code and departure_code == dep_code and destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -90,7 +90,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is None and departure_code is not None and destination_code is not None:
-            if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+            if departure_code == dep_code and destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -99,7 +99,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is not None and departure_code is None and destination_code is not None:
-            if transport_type == mapped_trans_code and destination_code == mapped_dest_code:
+            if transport_type == trans_code and destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -108,7 +108,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is not None and departure_code is not None and destination_code is None:
-            if transport_type == mapped_trans_code and departure_code == mapped_dep_code:
+            if transport_type == trans_code and departure_code == dep_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -117,7 +117,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is None and departure_code is None and destination_code is not None:
-            if destination_code == mapped_dest_code:
+            if destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -126,7 +126,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is None and departure_code is not None and destination_code is None:
-            if departure_code == mapped_dep_code:
+            if departure_code == dep_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -135,7 +135,7 @@ class EasycomegoApi(Resource):
             # end if
          # end if
          elif transport_type is not None and departure_code is None and destination_code is None:
-            if transport_type == mapped_trans_code:
+            if transport_type == trans_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -179,15 +179,15 @@ class EasycomegoApiDefault(Resource):
       for route in resp_payload:
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
-         #mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
-         #mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         #mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
-         mapped_dep_code = dep_code
-         mapped_dest_code = dest_code
-         mapped_trans_code = trans_code
+         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
+         #mapped_dep_code = dep_code
+         #mapped_dest_code = dest_code
+         #mapped_trans_code = trans_code
 
          if departure_code is not None and destination_code is not None:
-            if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
+            if departure_code == dep_code and destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -196,7 +196,7 @@ class EasycomegoApiDefault(Resource):
             # end if
          # end if
          elif departure_code is not None and destination_code is None:
-            if departure_code == mapped_dep_code:
+            if departure_code == dep_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
@@ -205,7 +205,7 @@ class EasycomegoApiDefault(Resource):
             # end if
          # end if
          elif departure_code is None and destination_code is not None:
-            if destination_code == mapped_dest_code:
+            if destination_code == dest_code:
                resp_list.append({
                   "transportCode":  mapped_trans_code,
                   "departureCode": mapped_dep_code,
