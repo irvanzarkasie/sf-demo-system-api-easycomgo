@@ -34,6 +34,12 @@ DEPDESTCODEMAP = {
   "EASY-SG-HF": "SG-01",
   "EASY-SG-BV": "SG-02"
 }
+DEPDESTCODEMAPREVERSE = {
+  "MY-01": "EASY-MY-PRT-KLANG",
+  "MY-02": "EASY-MY-BU",
+  "SG-01": "EASY-SG-HF",
+  "SG-02": "EASY-SG-BV",
+}
 
 # Hash map for transport type code
 TRANSTYPECODEMAP = {
@@ -43,13 +49,21 @@ TRANSTYPECODEMAP = {
    "MPV": "9004",
    "EXEC_TAXI": "9005"
 }
+TRANSTYPECODEMAPREVERSE = {
+   "9001": "BUS",
+   "9002": "SHIP",
+   "9003": "VAN",
+   "9004": "MPV",
+   "9005": "EXEC_TAXI"
+}  
 
 class EasycomegoApi(Resource):
-   def get(self, transport_type):
+   def get(self, transport_code):
       # Parse arguments
       args = request.args
-      departure_code = args.get("departureCode", None)
-      destination_code = args.get("destinationCode", None)
+      transport_type = TRANSTYPECODEMAPREVERSE.get(transport_code, None)
+      departure_code = DEPDESTCODEMAPREVERSE.get(args.get("departureCode", ""), None)
+      destination_code = DEPDESTCODEMAPREVERSE.get(args.get("destinationCode", ""), None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
       resp_payload = json.loads(resp.data.decode("utf-8"))
@@ -61,7 +75,7 @@ class EasycomegoApi(Resource):
          trans_code = route.get("transportCode")
          mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
          mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
+         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
 
          if transport_type is not None and departure_code is not None and destination_code is not None:
             if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
@@ -150,8 +164,8 @@ class EasycomegoApiDefault(Resource):
    def get(self):
       # Parse arguments
       args = request.args
-      departure_code = args.get("departureCode", None)
-      destination_code = args.get("destinationCode", None)
+      departure_code = DEPDESTCODEMAPREVERSE.get(args.get("departureCode", ""), None)
+      destination_code = DEPDESTCODEMAPREVERSE.get(args.get("destinationCode", ""), None)
 
       resp = http.request("GET", "http://168.119.225.15:39000/getRoutes")
       resp_payload = json.loads(resp.data.decode("utf-8"))
