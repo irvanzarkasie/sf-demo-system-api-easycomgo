@@ -226,7 +226,7 @@ class EasycomegoApiDefault(Resource):
    # end def
 # end class
 
-api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/<transport_type>/routes')
+api.add_resource(EasycomegoApi, '/sys/easycomeeasygo/booking/<transport_code>/routes')
 api.add_resource(EasycomegoApiDefault, '/sys/easycomeeasygo/booking/routes')
 
 if __name__ == '__main__':
