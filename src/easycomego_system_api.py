@@ -73,9 +73,12 @@ class EasycomegoApi(Resource):
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
          trans_code = route.get("transportCode")
-         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
-         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+         #mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         #mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         #mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+         mapped_dep_code = dep_code
+         mapped_dest_code = dest_code
+         mapped_trans_code = trans_code
 
          if transport_type is not None and departure_code is not None and destination_code is not None:
             if transport_type == mapped_trans_code and departure_code == mapped_dep_code and destination_code == mapped_dest_code:
@@ -176,9 +179,12 @@ class EasycomegoApiDefault(Resource):
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
          trans_code = route.get("transportCode")
-         mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
-         mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
+         #mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
+         #mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
+         #mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
+         mapped_dep_code = dep_code
+         mapped_dest_code = dest_code
+         mapped_trans_code = trans_code
 
          if departure_code is not None and destination_code is not None:
             if departure_code == mapped_dep_code and destination_code == mapped_dest_code:
