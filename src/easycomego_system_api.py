@@ -75,7 +75,7 @@ class EasycomegoApi(Resource):
          trans_code = route.get("transportCode")
          mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
          mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
-         mapped_trans_code = DEPDESTCODEMAP.get(trans_code, "")
+         mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
          #mapped_dep_code = dep_code
          #mapped_dest_code = dest_code
          #mapped_trans_code = trans_code
