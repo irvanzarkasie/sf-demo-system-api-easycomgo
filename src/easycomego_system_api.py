@@ -179,7 +179,6 @@ class EasycomegoApiDefault(Resource):
       for route in resp_payload:
          dep_code = route.get("departureCode")
          dest_code = route.get("destinationCode")
-         trans_code = route.get("transportCode")
          #mapped_dep_code = DEPDESTCODEMAP.get(dep_code, "")
          #mapped_dest_code = DEPDESTCODEMAP.get(dest_code, "")
          #mapped_trans_code = TRANSTYPECODEMAP.get(trans_code, "")
